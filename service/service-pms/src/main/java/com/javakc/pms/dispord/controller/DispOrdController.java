@@ -21,6 +21,7 @@ import java.util.List;
 @Api(value = "调度指令库管理")
 @RestController
 @RequestMapping("/pms/dispord")
+@CrossOrigin
 public class DispOrdController {
 
     @Autowired
@@ -30,13 +31,13 @@ public class DispOrdController {
     @GetMapping
     public APICODE findAll() {
         List<DispOrd> list = dispOrdService.findAll();
-        int i = 1/0;
+//        int i = 1/0;
         return APICODE.ok().data("items",list);
     }
 
     @ApiOperation(value = "根据条件进行分页查询 -- 调度指令库")
-    @PostMapping("findPageDispOrd")
-    public APICODE findPageDispOrd(DispOrdQuery dispOrdQuery, @RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize) {
+    @PostMapping("{pageNum}/{pageSize}")
+    public APICODE findPageDispOrd(@RequestBody(required = false) DispOrdQuery dispOrdQuery, @PathVariable(value = "pageNum") int pageNum, @PathVariable(value = "pageSize") int pageSize) {
         Page<DispOrd> page = dispOrdService.findPageDispOrd(dispOrdQuery, pageNum, pageSize);
         // 当前页的数据集合
         List<DispOrd> list = page.getContent();

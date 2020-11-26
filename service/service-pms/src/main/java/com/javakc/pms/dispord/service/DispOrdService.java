@@ -43,7 +43,7 @@ public class DispOrdService extends BaseService<DispOrdDao,DispOrd> {
      */
     public Page<DispOrd> findPageDispOrd(DispOrdQuery dispOrdQuery, int pageNum, int pageSize){
         SimpleSpecificationBuilder<DispOrd> simpleSpecificationBuilder = new SimpleSpecificationBuilder();
-        if (StringUtils.isEmpty(dispOrdQuery.getOrderName())){
+        if (!StringUtils.isEmpty(dispOrdQuery.getOrderName())){
             /**
              * 可用操作符
              * = 等值、!= 不等值 (字符串、数字)
@@ -56,6 +56,13 @@ public class DispOrdService extends BaseService<DispOrdDao,DispOrd> {
              * !null表示 is not null
              */
             simpleSpecificationBuilder.and("orderName",":",dispOrdQuery.getOrderName());
+        }
+        // 创建时间的区间查询
+        if (!StringUtils.isEmpty(dispOrdQuery.getBeginDate())){
+            simpleSpecificationBuilder.and("gmtCreate","ge",dispOrdQuery.getBeginDate());
+        }
+        if (!StringUtils.isEmpty(dispOrdQuery.getEndDate())){
+            simpleSpecificationBuilder.and("gmtCreate","lt",dispOrdQuery.getEndDate());
         }
         Page page = dao.findAll(simpleSpecificationBuilder.getSpecification(), PageRequest.of(pageNum - 1,pageSize));
         return page;

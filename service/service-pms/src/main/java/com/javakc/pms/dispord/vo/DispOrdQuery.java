@@ -2,6 +2,8 @@ package com.javakc.pms.dispord.vo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * @program: javakc-parent
  * @Description: 封装查询条件
@@ -12,5 +14,9 @@ import lombok.Data;
 public class DispOrdQuery {
 
     private String orderName;
+
+    private String beginDate;
+
+    private String endDate;
 
 }
