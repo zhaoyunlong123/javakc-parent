@@ -1,0 +1,22 @@
+server:
+  port: 9001 # 端口
+spring:
+  application:
+    name: api-gateway # 服务名
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 # nacos服务地址
+    gateway:
+      discovery:
+        locator:
+          enabled: true # 使用服务发现路由
+      routes:
+        - id: service-pms # id 可以随意填写，建议与服务名保持一致
+          uri: lb://service-pms  # 必须是服务名 目标访问资源 -- 一个服务
+          predicates:
+            - Path=/pms/** # 路径匹配  /*：只表示当前这一级  /admin？：问号表示单字符  /**：表示多层级
+        - id: service-mes # id 可以随意填写，建议与服务名保持一致
+          uri: lb://service-mes  # 必须是服务名 目标访问资源 -- 一个服务
+          predicates:
+             - Path=/mes/** # 路径匹配  /*：只表示当前这一级  /admin？：问号表示单字符  /**：表示多层级

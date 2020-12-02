@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/pms/user")
-@CrossOrigin // 解决跨域问题
+//@CrossOrigin // 解决跨域问题
 public class LoginController {
 
     @PostMapping("login")

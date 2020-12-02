@@ -1,27 +1,24 @@
-package com.javakc.pms;
+package com.javakc.mes;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 /**
  * @program: javakc-parent
- * @Description: 主程序
+ * @Description: mes启动类
+ * @Version： 1.0
  * @Author: zhao yun long
- * @date: 2020/11/23 22:36
+ * @date: 2020/12/1 20:40:23
  */
 @EnableJpaAuditing
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.javakc"})
 @EnableDiscoveryClient
-@EnableFeignClients
-public class PmsApplication {
-
+public class MesApplication {
     public static void main(String[] args) {
-        SpringApplication.run(PmsApplication.class, args);
+        SpringApplication.run(MesApplication.class, args);
     }
-
 }
